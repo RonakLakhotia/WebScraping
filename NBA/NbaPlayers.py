@@ -2,6 +2,8 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import self
 import os
+import errno
+import requests
 
 class Player():
 
@@ -74,6 +76,15 @@ def getPlayerDetails(playerList):
     	
     driver.quit()
     	
+def mkdir_path(path):
+    try:
+        os.makedirs(path)
+    except OSError as exc:
+        if exc.errno == errno.EEXIST and os.path.isdir(path):
+            pass
+        else:
+            raise
+
 def getPlayersImage(playerList):
 
 	driver = webdriver.PhantomJS(executable_path = '/Users/ronaklakhotia/Desktop/phantomjs')
@@ -84,9 +95,23 @@ def getPlayersImage(playerList):
 		driver.get(playerUrl)
 		soup = BeautifulSoup(driver.page_source, 'lxml')
 
+		div = soup.find('div', class_ = 'player-summary__image-block')
+		img = div.find('img')
+		print(img['src'])
+
+		imageFile = open('/Users/ronaklakhotia/Desktop/WebScraping/NBA/Images/{0}.jpg'.format(player.name), 'wb')
+		imageFile.write(requests.get(img['src']).content)
+		imageFile.close()
 
 
+	driver.quit()
+		
 players = getPlayerList()
+directoryNameToStoreImages = 'Images'
+directoryPathOfFolder = '/Users/ronaklakhotia/Desktop/WebScraping/NBA'
+os.chdir(directoryPathOfFolder)
+mkdir_path(directoryNameToStoreImages)
+getPlayersImage(players)
 getPlayerDetails(players)	
-
+getPlayersImage(players)
 	
