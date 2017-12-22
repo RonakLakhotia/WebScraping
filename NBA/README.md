@@ -1,3 +1,3 @@
 # WebScraping
 
-Extract out the details of first 100 NBA players
+Extract out the details like Height, Weight and Date of Birth of NBA players, using the technique of Web Scraping.
