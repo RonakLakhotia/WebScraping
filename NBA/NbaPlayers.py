@@ -27,8 +27,35 @@ def getPlayerList():
 	playerList = []
 
 	for aTag in div.find_all('a'):
-		print(aTag.text)
+		newPlayer = Player()
+		newPlayer.name = aTag.text
+		newPlayer.link = aTag['href']
+		playerList.append(newPlayer)
 
-getPlayerList()	
+	driver.quit()
+	return playerList
+
+
+def getPlayerDetails(playerList):
+
+	driver = webdriver.PhantomJS(executable_path = '/Users/ronaklakhotia/Desktop/phantomjs')
+
+	for player in playerList[1:3]:
+
+		playerUrl = 'https://stats.nba.com' + player.link
+		driver.get(playerUrl)
+		soup = BeautifulSoup(driver.page_source, 'lxml')
+
+		Height = ""
+		h_span = soup.find('div', string = 'HT')
+
+		for span in h_span.findNextSiblings():
+    		Height = Height + span.text
+
+    	print(Height)
+
+
+players = getPlayerList()
+getPlayerDetails(players)	
 
 	
