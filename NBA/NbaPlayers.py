@@ -52,8 +52,25 @@ def getPlayerDetails(playerList):
 		for span in h_span.findNextSiblings():
     		Height = Height + span.text
 
-    	print(Height)
+    	print("Height - " + Height)
 
+    	Weight = ""
+    	w_span = soup.find('div', string = 'WT')
+
+    	for span in w_span.findNextSiblings():
+    		Weight = Weight + span.text
+
+    	print("Weight - " + Weight)
+
+    	DateOfBirth = ""
+    	b_span = soup.find('div', string = 'BORN')
+
+    	for span in b_span.findNextSiblings():
+    		DateOfBirth = DateOfBirth + span.text
+
+    	print("Date of Birth - " + DateOfBirth)	
+    	print()
+    	
 
 players = getPlayerList()
 getPlayerDetails(players)	
