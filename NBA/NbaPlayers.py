@@ -1,14 +1,15 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup
+import self
 
 class Player():
 
 	#attributes for each player
-	  name = ""
-	  link = ""
-	  Height = ""
-	  Weight = ""
-	  DateOfBirth = ""
+	  self.name = ""
+	  self.link = ""
+	  self.Height = ""
+	  self.Weight = ""
+	  self.DateOfBirth = ""
 
 
 def getPlayerList():
