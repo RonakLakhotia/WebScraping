@@ -4,6 +4,7 @@ import self
 import os
 import errno
 import requests
+import time
 
 class Player():
 
@@ -93,6 +94,9 @@ def getPlayersImage(playerList):
 
 		playerUrl = 'https://stats.nba.com' + player.link
 		driver.get(playerUrl)
+
+		time.sleep(2)
+		
 		soup = BeautifulSoup(driver.page_source, 'lxml')
 
 		div = soup.find('div', class_ = 'player-summary__image-block')
