@@ -1,6 +1,7 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import self
+import os
 
 class Player():
 
@@ -71,6 +72,19 @@ def getPlayerDetails(playerList):
     	print("Date of Birth - " + DateOfBirth)	
     	print()
     	
+    driver.quit()
+    	
+def getPlayersImage(playerList):
+
+	driver = webdriver.PhantomJS(executable_path = '/Users/ronaklakhotia/Desktop/phantomjs')
+
+	for player in playerList[1:2]:
+
+		playerUrl = 'https://stats.nba.com' + player.link
+		driver.get(playerUrl)
+		soup = BeautifulSoup(driver.page_source, 'lxml')
+
+
 
 players = getPlayerList()
 getPlayerDetails(players)	
