@@ -22,8 +22,12 @@ def getPlayerList():
 
 	#create soup
 	soup = BeautifulSoup(driver.page_source, 'lxml')
-	div = soup.find('div', class_ = 'columns / small-12 / section-view-overlay')
+	div = soup.find('div', class_ = 'stats-player-list players-list')
 
+	playerList = []
+
+	for aTag in div.find_all('a'):
+		print(aTag.text)
 
 getPlayerList()	
 
